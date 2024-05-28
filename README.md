@@ -1,6 +1,4 @@
 # PortfolioWebsite
-PortfolioWebsite: A showcase of my projects and skills, hosted on GitHub for easy access and sharing.
-# PortfolioWebsite
 
 Welcome to my Portfolio Website repository! This project serves as a showcase of my skills and projects.
 
