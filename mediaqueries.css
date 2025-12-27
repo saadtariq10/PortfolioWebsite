@@ -1,6 +1,6 @@
 @media screen and (max-width: 1400px) {
   #profile {
-    height: 83vh;
+    min-height: 83vh;
     margin-bottom: 6rem;
   }
   .about-containers {
@@ -8,7 +8,10 @@
   }
   #contact,
   #projects {
-    height: fit-content;
+    min-height: fit-content;
+  }
+  nav {
+    padding: 0 3rem;
   }
 }
 
@@ -18,10 +21,27 @@
   }
   #hamburger-nav {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 10vh;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-primary);
   }
-  #experience,
-  .experience-details-container {
+  #experience {
     margin-top: 2rem;
+  }
+  
+  .experience-container {
+    max-width: 100%;
+  }
+  
+  .experience-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
   #profile,
   .section-container {
@@ -32,7 +52,7 @@
   }
   section,
   .section-container {
-    height: fit-content;
+    min-height: fit-content;
   }
   section {
     margin: 0 5%;
@@ -45,22 +65,31 @@
   .about-containers {
     margin-top: 0;
   }
+  .skills-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  .projects-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  nav {
+    padding: 0 2rem;
+  }
 }
 
 @media screen and (max-width: 600px) {
   #contact,
   footer {
-    height: 40vh;
+    min-height: 40vh;
   }
   #profile {
-    height: 83vh;
+    min-height: 83vh;
     margin-bottom: 0;
   }
   article {
     font-size: 1rem;
   }
   footer nav {
-    height: fit-content;
+    min-height: fit-content;
     margin-bottom: 2rem;
   }
   .about-containers,
@@ -79,7 +108,7 @@
     font-size: 1.25rem;
   }
   .logo {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   .nav-links {
     flex-direction: column;
@@ -99,5 +128,46 @@
   }
   .text-container {
     text-align: justify;
+  }
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+  .filter-container {
+    gap: 0.5rem;
+  }
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  .featured-content {
+    padding: 1.5rem;
+  }
+  .experience-item {
+    padding: 1.5rem;
+  }
+  .experience-title {
+    font-size: 1.2rem;
+  }
+  .education-item {
+    padding: 1.5rem;
+  }
+  .project-card {
+    padding: 1.5rem;
+  }
+  .contact-info-upper-container {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  section {
+    margin: 0 3%;
+  }
+  nav {
+    padding: 0 1rem;
+  }
+  #hamburger-nav {
+    padding: 0 1rem;
   }
 }
