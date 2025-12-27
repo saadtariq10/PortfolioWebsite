@@ -96,31 +96,6 @@ a:hover {
   cursor: default;
 }
 
-.theme-toggle {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
-  position: relative;
-  z-index: 1001;
-  pointer-events: auto;
-}
-
-.theme-toggle * {
-  pointer-events: none;
-}
-
-.theme-toggle:hover {
-  background-color: var(--bg-secondary);
-  transform: scale(1.1);
-}
 
 /* HAMBURGER MENU */
 
@@ -317,14 +292,6 @@ section {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-[data-theme="dark"] .btn-color-1 {
-  background: var(--accent);
-  color: var(--bg-primary);
-}
-
-[data-theme="dark"] .btn-color-1:hover {
-  background: var(--accent-hover);
-}
 
 .btn-color-2 {
   background: transparent;
@@ -720,10 +687,6 @@ section {
   font-weight: 500;
 }
 
-[data-theme="dark"] .tech-tag {
-  background: var(--accent);
-  color: var(--bg-primary);
-}
 
 /* PROJECTS SECTION */
 
@@ -762,10 +725,6 @@ section {
   border-color: var(--accent);
 }
 
-[data-theme="dark"] .filter-btn.active {
-  background: var(--accent);
-  color: var(--bg-primary);
-}
 
 .projects-container {
   display: grid;
