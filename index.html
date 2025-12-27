@@ -9,38 +9,13 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./mediaqueries.css" />
     <script>
-      // Inline dark mode function as backup - ensures it works even if external script fails
-      function toggleDarkMode() {
-        try {
-          const currentTheme = document.documentElement.getAttribute("data-theme") || localStorage.getItem("theme") || "light";
-          const newTheme = currentTheme === "dark" ? "light" : "dark";
-          document.documentElement.setAttribute("data-theme", newTheme);
-          localStorage.setItem("theme", newTheme);
-          const icons = document.querySelectorAll(".theme-icon");
-          icons.forEach(icon => {
-            if (icon) icon.textContent = newTheme === "dark" ? "☀️" : "🌙";
-          });
-          console.log("Theme toggled to:", newTheme);
-        } catch (error) {
-          console.error("Error toggling theme:", error);
-        }
-      }
-      window.toggleDarkMode = toggleDarkMode;
-      
-      // Make it available on window immediately
-      if (typeof window !== 'undefined') {
-        window.toggleDarkMode = toggleDarkMode;
-      }
-      
-      // Initialize theme on page load
+      // SIMPLE: Initialize theme on load
       (function() {
-        const savedTheme = localStorage.getItem("theme") || "light";
-        document.documentElement.setAttribute("data-theme", savedTheme);
-        const icons = document.querySelectorAll(".theme-icon");
-        icons.forEach(icon => {
-          if (icon) icon.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+        const saved = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", saved);
+        document.querySelectorAll(".theme-icon").forEach(icon => {
+          icon.textContent = saved === "dark" ? "☀️" : "🌙";
         });
-        
       })();
     </script>
   </head>
