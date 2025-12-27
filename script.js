@@ -8,14 +8,18 @@ function toggleMenu() {
 
 // Dark mode toggle
 function initTheme() {
-  const themeToggle = document.getElementById("theme-toggle");
-  const themeToggleMobile = document.getElementById("theme-toggle-mobile");
+  // Set initial theme from localStorage or default to light
   const currentTheme = localStorage.getItem("theme") || "light";
-  
   document.documentElement.setAttribute("data-theme", currentTheme);
   updateThemeIcon(currentTheme);
 
-  const toggleTheme = () => {
+  // Get theme toggle buttons
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeToggleMobile = document.getElementById("theme-toggle-mobile");
+
+  // Toggle theme function
+  const toggleTheme = (e) => {
+    if (e) e.preventDefault();
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const newTheme = currentTheme === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", newTheme);
@@ -23,10 +27,13 @@ function initTheme() {
     updateThemeIcon(newTheme);
   };
 
+  // Attach event listeners
   if (themeToggle) {
+    themeToggle.removeEventListener("click", toggleTheme); // Remove if exists to prevent duplicates
     themeToggle.addEventListener("click", toggleTheme);
   }
   if (themeToggleMobile) {
+    themeToggleMobile.removeEventListener("click", toggleTheme); // Remove if exists to prevent duplicates
     themeToggleMobile.addEventListener("click", toggleTheme);
   }
 }
@@ -34,7 +41,9 @@ function initTheme() {
 function updateThemeIcon(theme) {
   const icons = document.querySelectorAll(".theme-icon");
   icons.forEach(icon => {
-    icon.textContent = theme === "dark" ? "☀️" : "🌙";
+    if (icon) {
+      icon.textContent = theme === "dark" ? "☀️" : "🌙";
+    }
   });
 }
 
@@ -96,7 +105,7 @@ function scrollToSection(sectionId) {
 }
 
 // Initialize all functions when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
+function initializePortfolio() {
   try {
     initTheme();
     initProjectFilter();
@@ -104,14 +113,24 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch (error) {
     console.error("Error initializing portfolio:", error);
   }
-});
+}
 
 // Make scrollToSection available globally
 window.scrollToSection = scrollToSection;
 
-// Fallback: Initialize theme immediately if DOM is already loaded
+// Make toggleDarkMode available globally as fallback
+window.toggleDarkMode = function() {
+  const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+  updateThemeIcon(newTheme);
+};
+
+// Initialize based on document ready state
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initTheme);
+  document.addEventListener('DOMContentLoaded', initializePortfolio);
 } else {
-  initTheme();
+  // DOM is already loaded
+  initializePortfolio();
 }
