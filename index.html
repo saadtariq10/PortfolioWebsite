@@ -30,6 +30,40 @@
         icons.forEach(icon => {
           if (icon) icon.textContent = savedTheme === "dark" ? "☀️" : "🌙";
         });
+        
+        // Add event listeners as backup - try immediately and on DOMContentLoaded
+        function attachThemeListeners() {
+          const themeToggle = document.getElementById("theme-toggle");
+          const themeToggleMobile = document.getElementById("theme-toggle-mobile");
+          
+          if (themeToggle) {
+            themeToggle.onclick = function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleDarkMode();
+              return false;
+            };
+          }
+          
+          if (themeToggleMobile) {
+            themeToggleMobile.onclick = function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleDarkMode();
+              return false;
+            };
+          }
+        }
+        
+        // Try immediately
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', attachThemeListeners);
+        } else {
+          attachThemeListeners();
+        }
+        
+        // Also try after a short delay to catch late-loading elements
+        setTimeout(attachThemeListeners, 100);
       })();
     </script>
   </head>
@@ -46,7 +80,7 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleDarkMode()">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleDarkMode(); return false;">
         <span class="theme-icon">🌙</span>
       </button>
     </nav>
@@ -67,7 +101,7 @@
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
       </div>
-      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle dark mode" onclick="toggleDarkMode()">
+      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle dark mode" onclick="toggleDarkMode(); return false;">
         <span class="theme-icon">🌙</span>
       </button>
     </nav>
