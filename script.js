@@ -6,47 +6,6 @@ function toggleMenu() {
   icon.classList.toggle("open");
 }
 
-// Dark mode toggle
-function initTheme() {
-  // Set initial theme from localStorage or default to light
-  const currentTheme = localStorage.getItem("theme") || "light";
-  document.documentElement.setAttribute("data-theme", currentTheme);
-  updateThemeIcon(currentTheme);
-
-  // Get theme toggle buttons
-  const themeToggle = document.getElementById("theme-toggle");
-  const themeToggleMobile = document.getElementById("theme-toggle-mobile");
-
-  // Toggle theme function
-  const toggleTheme = (e) => {
-    if (e) e.preventDefault();
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    updateThemeIcon(newTheme);
-  };
-
-  // Attach event listeners
-  if (themeToggle) {
-    themeToggle.removeEventListener("click", toggleTheme); // Remove if exists to prevent duplicates
-    themeToggle.addEventListener("click", toggleTheme);
-  }
-  if (themeToggleMobile) {
-    themeToggleMobile.removeEventListener("click", toggleTheme); // Remove if exists to prevent duplicates
-    themeToggleMobile.addEventListener("click", toggleTheme);
-  }
-}
-
-function updateThemeIcon(theme) {
-  const icons = document.querySelectorAll(".theme-icon");
-  icons.forEach(icon => {
-    if (icon) {
-      icon.textContent = theme === "dark" ? "☀️" : "🌙";
-    }
-  });
-}
-
 // Project filtering
 function initProjectFilter() {
   const filterButtons = document.querySelectorAll(".filter-btn");
