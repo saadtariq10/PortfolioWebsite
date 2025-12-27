@@ -21,18 +21,6 @@
   --shadow-hover: rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="dark"] {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --border-color: #334155;
-  --accent: #f1f5f9;
-  --accent-hover: #ffffff;
-  --card-bg: #1e293b;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-hover: rgba(0, 0, 0, 0.5);
-}
 
 body {
   font-family: "Inter", sans-serif;

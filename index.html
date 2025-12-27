@@ -8,16 +8,6 @@
     <link rel="icon" type="image/png" href="./assets/st-1.svg" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./mediaqueries.css" />
-    <script>
-      // SIMPLE: Initialize theme on load
-      (function() {
-        const saved = localStorage.getItem("theme") || "light";
-        document.documentElement.setAttribute("data-theme", saved);
-        document.querySelectorAll(".theme-icon").forEach(icon => {
-          icon.textContent = saved === "dark" ? "☀️" : "🌙";
-        });
-      })();
-    </script>
   </head>
   <body>
     <nav id="desktop-nav">
@@ -32,9 +22,6 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" type="button" onclick="var t=document.documentElement.getAttribute('data-theme')||'light';var n=t==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.querySelectorAll('.theme-icon').forEach(function(i){i.textContent=n==='dark'?'☀️':'🌙';});return false;">
-        <span class="theme-icon">🌙</span>
-      </button>
     </nav>
     <nav id="hamburger-nav">
       <div class="logo">Saad Tariq</div>
@@ -53,9 +40,6 @@
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
       </div>
-      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle dark mode" type="button" onclick="var t=document.documentElement.getAttribute('data-theme')||'light';var n=t==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.querySelectorAll('.theme-icon').forEach(function(i){i.textContent=n==='dark'?'☀️':'🌙';});return false;">
-        <span class="theme-icon">🌙</span>
-      </button>
     </nav>
     <section id="profile">
       <div class="section__pic-container">

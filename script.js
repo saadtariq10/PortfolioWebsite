@@ -1,25 +1,3 @@
-// Dark mode toggle function - SIMPLE AND DIRECT
-window.toggleDarkMode = function() {
-  try {
-    const currentTheme = document.documentElement.getAttribute("data-theme") || localStorage.getItem("theme") || "light";
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    
-    // Update icon
-    const icons = document.querySelectorAll(".theme-icon");
-    icons.forEach(icon => {
-      if (icon) {
-        icon.textContent = newTheme === "dark" ? "☀️" : "🌙";
-      }
-    });
-    return false;
-  } catch(e) {
-    console.error("Dark mode error:", e);
-    return false;
-  }
-};
-
 // Hamburger menu toggle
 function toggleMenu() {
   const menu = document.querySelector(".menu-links");
