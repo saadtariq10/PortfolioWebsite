@@ -11,16 +11,26 @@
     <script>
       // Inline dark mode function as backup - ensures it works even if external script fails
       function toggleDarkMode() {
-        const currentTheme = document.documentElement.getAttribute("data-theme") || localStorage.getItem("theme") || "light";
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        const icons = document.querySelectorAll(".theme-icon");
-        icons.forEach(icon => {
-          if (icon) icon.textContent = newTheme === "dark" ? "☀️" : "🌙";
-        });
+        try {
+          const currentTheme = document.documentElement.getAttribute("data-theme") || localStorage.getItem("theme") || "light";
+          const newTheme = currentTheme === "dark" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+          const icons = document.querySelectorAll(".theme-icon");
+          icons.forEach(icon => {
+            if (icon) icon.textContent = newTheme === "dark" ? "☀️" : "🌙";
+          });
+          console.log("Theme toggled to:", newTheme);
+        } catch (error) {
+          console.error("Error toggling theme:", error);
+        }
       }
       window.toggleDarkMode = toggleDarkMode;
+      
+      // Make it available on window immediately
+      if (typeof window !== 'undefined') {
+        window.toggleDarkMode = toggleDarkMode;
+      }
       
       // Initialize theme on page load
       (function() {
@@ -36,22 +46,33 @@
           const themeToggle = document.getElementById("theme-toggle");
           const themeToggleMobile = document.getElementById("theme-toggle-mobile");
           
-          if (themeToggle) {
-            themeToggle.onclick = function(e) {
+          function handleThemeClick(e) {
+            if (e) {
               e.preventDefault();
               e.stopPropagation();
-              toggleDarkMode();
-              return false;
-            };
+            }
+            toggleDarkMode();
+            return false;
+          }
+          
+          if (themeToggle) {
+            // Remove any existing listeners
+            themeToggle.onclick = null;
+            // Add new listener
+            themeToggle.addEventListener('click', handleThemeClick, true);
+            themeToggle.addEventListener('mousedown', handleThemeClick, true);
+            // Also set onclick as backup
+            themeToggle.onclick = handleThemeClick;
           }
           
           if (themeToggleMobile) {
-            themeToggleMobile.onclick = function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleDarkMode();
-              return false;
-            };
+            // Remove any existing listeners
+            themeToggleMobile.onclick = null;
+            // Add new listener
+            themeToggleMobile.addEventListener('click', handleThemeClick, true);
+            themeToggleMobile.addEventListener('mousedown', handleThemeClick, true);
+            // Also set onclick as backup
+            themeToggleMobile.onclick = handleThemeClick;
           }
         }
         
@@ -62,8 +83,10 @@
           attachThemeListeners();
         }
         
-        // Also try after a short delay to catch late-loading elements
+        // Also try after delays to catch late-loading elements
         setTimeout(attachThemeListeners, 100);
+        setTimeout(attachThemeListeners, 500);
+        setTimeout(attachThemeListeners, 1000);
       })();
     </script>
   </head>
@@ -80,7 +103,7 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" onclick="toggleDarkMode(); return false;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" type="button" onclick="toggleDarkMode(); return false;">
         <span class="theme-icon">🌙</span>
       </button>
     </nav>
@@ -101,7 +124,7 @@
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
       </div>
-      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle dark mode" onclick="toggleDarkMode(); return false;">
+      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle dark mode" type="button" onclick="toggleDarkMode(); return false;">
         <span class="theme-icon">🌙</span>
       </button>
     </nav>
