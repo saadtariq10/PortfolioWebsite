@@ -97,10 +97,21 @@ function scrollToSection(sectionId) {
 
 // Initialize all functions when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  initTheme();
-  initProjectFilter();
-  initSmoothScroll();
+  try {
+    initTheme();
+    initProjectFilter();
+    initSmoothScroll();
+  } catch (error) {
+    console.error("Error initializing portfolio:", error);
+  }
 });
 
 // Make scrollToSection available globally
 window.scrollToSection = scrollToSection;
+
+// Fallback: Initialize theme immediately if DOM is already loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTheme);
+} else {
+  initTheme();
+}
