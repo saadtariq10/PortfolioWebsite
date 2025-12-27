@@ -1,3 +1,22 @@
+// Dark mode toggle function - defined first for immediate availability
+function toggleDarkMode() {
+  const currentTheme = document.documentElement.getAttribute("data-theme") || localStorage.getItem("theme") || "light";
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+  
+  // Update icon
+  const icons = document.querySelectorAll(".theme-icon");
+  icons.forEach(icon => {
+    if (icon) {
+      icon.textContent = newTheme === "dark" ? "☀️" : "🌙";
+    }
+  });
+}
+
+// Make toggleDarkMode available globally immediately
+window.toggleDarkMode = toggleDarkMode;
+
 // Hamburger menu toggle
 function toggleMenu() {
   const menu = document.querySelector(".menu-links");
@@ -117,15 +136,6 @@ function initializePortfolio() {
 
 // Make scrollToSection available globally
 window.scrollToSection = scrollToSection;
-
-// Make toggleDarkMode available globally as fallback
-window.toggleDarkMode = function() {
-  const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
-  const newTheme = currentTheme === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", newTheme);
-  localStorage.setItem("theme", newTheme);
-  updateThemeIcon(newTheme);
-};
 
 // Initialize based on document ready state
 if (document.readyState === 'loading') {
